@@ -1,0 +1,148 @@
+@import url('https://fonts.cdnfonts.com/css/helmet');
+@import url('https://fonts.cdnfonts.com/css/menlo');
+
+* {
+	font-family: 'Helmet', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+	background-color: #e8e2d1;
+	color: black;
+	padding: 20px;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+::-webkit-scrollbar-track {
+	background: none; 
+}
+::-webkit-scrollbar-thumb {
+	background: black; 
+}
+
+#layout-wrapper {
+	display: grid;
+	grid-auto-flow: column;
+	width: calc(100vw - 40px);
+	height: calc(100vh - 40px);
+	grid-template-columns: fit-content(120px) auto;
+	border: 0.5px solid black;
+}
+
+
+.layout-item {
+	border: 0.5px solid black;
+	padding: 15px;
+	
+}
+
+#header {
+	grid-column: 1 / span 2;
+    grid-row: 1 / span 1;
+    font-weight: bold;
+    font-size: 1.5em;
+    font-family: 'Menlo', sans-serif;
+    height: 60px;
+    
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+#nav-wrapper {
+	grid-column: 1 / span 1;
+    grid-row: 2 / span 1;
+    height: calc(100vh - 100px);
+}
+#content {
+	grid-column: 2 / span 1;
+    grid-row: 2 / span 1;
+    height: calc(100vh - 100px);
+    
+    overflow-y: scroll;
+}
+
+#content p {
+	margin-bottom: 10px;
+}
+
+.nav-entry {
+	list-style: none;
+}
+
+.nav-entry a {
+	color: black;
+	text-decoration: none;
+}
+
+.content-section {
+	padding: 10px 0px 30px 0px;
+}
+.section-title {
+	margin-bottom: 10px;
+	font-weight: bold;
+    font-size: 1.3em;
+    font-family: 'Menlo', sans-serif;
+}
+
+.resume-entry {
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: fit-content(90px) auto;
+	border: 0.5px solid black;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+.resume-entry-element {
+	border: 0.5px solid black;
+	padding: 5px;
+}
+.resume-entry-title {
+	grid-column: 1 / span 2;
+    grid-row: 1 / span 1;
+    font-weight: bold;
+}
+.resume-entry-subtitle {
+	grid-column: 1 / span 2;
+    grid-row: 2 / span 1;
+    font-style: italic;
+}
+.resume-entry-label-1 {
+	grid-column: 1 / span 1;
+    grid-row: 3 / span 1;
+}
+.resume-entry-label-2 {
+	grid-column: 1 / span 1;
+    grid-row: 4 / span 1;
+}
+.resume-entry-label-3 {
+	grid-column: 1 / span 1;
+    grid-row: 5 / span 1;
+}
+.resume-entry-label-4 {
+	grid-column: 1 / span 1;
+    grid-row: 6 / span 1;
+}
+.resume-entry-value-1 {
+	grid-column: 2 / span 1;
+    grid-row: 3 / span 1;
+}
+.resume-entry-value-2 {
+	grid-column: 2 / span 1;
+    grid-row: 4 / span 1;
+}
+.resume-entry-value-3 {
+	grid-column: 2 / span 1;
+    grid-row: 5 / span 1;
+}
+.resume-entry-value-4 {
+	grid-column: 2 / span 1;
+    grid-row: 6 / span 1;
+}
+
+#publications-list {
+	padding-left: 20px;
+}
