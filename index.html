@@ -8,6 +8,7 @@
         <title>Mattia Giannaccari | PhD Student @ REVEAL</title>
         
         <link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
 	<body>
@@ -84,14 +85,22 @@
 
 					<ol reversed>
 						<li>
-							<a href="publications/Giannaccari2025a.pdf" target="blank"><span class="publication-title">Code Refactoring in Virtual Reality</span></a>
+							<span class="publication-title">Code Refactoring in Virtual Reality</span>
 							<span class="publication-authors">Mattia Giannaccari, Marco Raglianti, Michele Lanza</span>
 							<span class="publication-info">Proceedings of IDE 2025 (Workshop on Integrated Development Environments), in press, IEEE/ACM</span>
+							<span class="publication-actions">
+								<a href="publications/Giannaccari2025a.pdf" target="blank">.pdf</a>
+								<a href="publications/Giannaccari2025a.bib" target="blank">.bib</a>
+							</span>
 						</li>
 						<li>
-							<a href="publications/Giannaccari2024a.pdf" target="blank"><span class="publication-title">Manipulating VR-Native User Interfaces for Software Visualization Customization</span></a>
+							<a href="https://ieeexplore.ieee.org/document/10794837" target="blank"><span class="publication-title">Manipulating VR-Native User Interfaces for Software Visualization Customization</span></a>
 							<span class="publication-authors">Mattia Giannaccari, Marco Raglianti, Michele Lanza</span>
 							<span class="publication-info">Proceedings of VISSOFT 2024 (Working Conference on Software Visualization), pages 111-115, IEEE</span>
+							<span class="publication-actions">
+								<a href="publications/Giannaccari2024a.pdf" target="blank">.pdf</a>
+								<a href="publications/Giannaccari2024a.bib" target="blank">.bib</a>
+							</span>
 						</li>
 					</ol>
 
@@ -157,40 +166,84 @@
 
 		<script>
 			var collapsibles = document.getElementsByClassName("collapsible");
-			var i;
 
-			for (i = 0; i < collapsibles.length; i++) {
+			function expandSection(section) {
+				section.classList.add("active");
+				var content = section.nextElementSibling;
+				content.style.maxHeight = content.scrollHeight + "px";
+			}
+
+			function collapseSection(section) {
+				section.classList.remove("active");
+				var content = section.nextElementSibling;
+				content.style.maxHeight = null;
+			}
+
+			
+			function updateUrlWithExpandedSections() {
+				var expandendCollapsiblesUrlParameterValue = "";
+				for (var i = 0; i < collapsibles.length; i++) {
+					if(collapsibles[i].classList.contains("active")) {
+						expandendCollapsiblesUrlParameterValue += i + "-";
+					}
+				}
+
+				if(expandendCollapsiblesUrlParameterValue.length > 0) {
+					expandendCollapsiblesUrlParameterValue = expandendCollapsiblesUrlParameterValue.slice(0, -1); // Remove the last character if it is a "-"
+					window.history.replaceState({}, '', window.location.pathname + '?e=' + expandendCollapsiblesUrlParameterValue);
+				}
+				else {
+					window.history.replaceState({}, '', window.location.pathname);
+				}
+			}
+
+			// Expand sections based on URL parameters when the page is loaded
+			const urlParams = new URLSearchParams(window.location.search);
+			if(urlParams.has('e')) {
+				const e = urlParams.get('e').split('-');
+				for (i = 0; i < e.length; i++) {
+					if(e[i] >= 0 && e[i] < collapsibles.length) {
+						expandSection(collapsibles[e[i]]);
+					}
+				}
+			}
+
+
+			// Add event listeners to collapsibles
+			for (var i = 0; i < collapsibles.length; i++) {
 				collapsibles[i].addEventListener("click", function() {
 					this.classList.toggle("active");
+
 					var content = this.nextElementSibling;
 					if (content.style.maxHeight){
 						content.style.maxHeight = null;
 					}
 					else {
 						content.style.maxHeight = content.scrollHeight + "px";
-					} 
+					}
+					updateUrlWithExpandedSections();
 				});
 			}
 			
+			// Add event listeners to collapse-all and expand-all buttons
 			document.getElementById("collapse-all-button").addEventListener("click", function() {
-				for (i = 0; i < collapsibles.length; i++) {
-					collapsibles[i].classList.remove("active");
-					var content = collapsibles[i].nextElementSibling;
-					content.style.maxHeight = null;
+				for (var i = 0; i < collapsibles.length; i++) {
+					collapseSection(collapsibles[i]);
 				}
+				updateUrlWithExpandedSections();
 			});
 			
 			document.getElementById("expand-all-button").addEventListener("click", function() {
 				for (i = 0; i < collapsibles.length; i++) {
-					collapsibles[i].classList.add("active");
-					var content = collapsibles[i].nextElementSibling;
-					content.style.maxHeight = content.scrollHeight + "px";
+					expandSection(collapsibles[i]);
 				}
+				updateUrlWithExpandedSections();
 			});
 			
+			// Add event listener to update the collapsibles sizes when the window is resized
 			window.addEventListener('resize', function(event) {
 				var expandendCollapsibles = document.getElementsByClassName("collapsible active");
-				for (i = 0; i < expandendCollapsibles.length; i++) {
+				for (var i = 0; i < expandendCollapsibles.length; i++) {
 					var content = expandendCollapsibles[i].nextElementSibling;
 					content.style.maxHeight = content.scrollHeight + "px";
 				}

@@ -146,6 +146,22 @@ a {
 .publication-info {
 	display: block;
 	font-style: italic;
+	margin-bottom: 6px;
+}
+
+.publication-actions {
+	display: block;
+	margin-bottom: 15px;
+}
+
+.publication-actions a {
+	text-decoration: none;
+	font-size: 0.7em;
+	background-color: #070707;
+	color: #f7f7f7;
+	padding: 2px 4px;
+	margin: 0 2px;
+	font-family: 'Menlo', sans-serif;
 }
 
 
